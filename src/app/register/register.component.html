@@ -1,25 +1,21 @@
 <div class="container">
-  <form>
+  <form [formGroup]="regForm" (ngSubmit)="onSubmit(regForm.value)">
     <div class="form-group">
         <label for="firstname">First Name</label>
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" formControlName="firstname"/>
     </div>
     <div class="form-group">
         <label for="lastname">Last Name</label>
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" formControlName="lastname"/>
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control"/>
+        <input type="text" class="form-control" formControlName="username"/>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control"/>
+        <input type="password" class="form-control" formControlName="password"/>
     </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password</label>
-      <input type="password" class="form-control"/>
-  </div>
     <div class="form-group">
         <button class="btn btn-primary">Register</button>
     </div>

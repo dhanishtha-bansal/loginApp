@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit() {
-    alert(`login successful! ${this.userName} ${this.password}`);
+  onSubmit(value: string) {
+    console.log(value);
   }
 }
