@@ -2,22 +2,34 @@
   <form [formGroup]="regForm" (ngSubmit)="onSubmit(regForm.value)">
     <div class="form-group">
         <label for="firstname">First Name</label>
-        <input type="text" class="form-control" formControlName="firstname"/>
+        <input type="text" class="form-control" formControlName="firstname" required  [ngClass]=" {'was-validated': submitted && !firstname.valid }" /> 
+        <div *ngIf="submitted && !firstname.valid" class="help-block">
+            First name is required
+        </div>
     </div>
     <div class="form-group">
         <label for="lastname">Last Name</label>
-        <input type="text" class="form-control" formControlName="lastname"/>
+        <input type="text" class="form-control" formControlName="lastname" required [ngClass]=" {'was-validated': submitted && !lastname.valid }"/>
+        <div *ngIf="submitted && !lastname.valid" class="help-block">
+            Last name is required
+        </div>
     </div>
     <div class="form-group">
         <label for="username">Username</label>
-        <input type="text" class="form-control" formControlName="username"/>
+        <input type="text" class="form-control" formControlName="username" required [ngClass]=" {'was-validated': submitted && !username.valid }"/>
+        <div *ngIf="submitted && !username.valid" class="help-block">
+            Username is required
+        </div>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" formControlName="password"/>
+        <input type="password" class="form-control" formControlName="password" required minlength="6" [ngClass]=" {'was-validated': submitted && !password.valid }"/>
+        <div *ngIf="submitted && !password.valid" class="help-block">
+            Enter a valid password
+        </div>
     </div>
     <div class="form-group">
-        <button class="btn btn-primary">Register</button>
+        <button class="btn btn-primary" >Register</button>
     </div>
   </form>
 </div>
