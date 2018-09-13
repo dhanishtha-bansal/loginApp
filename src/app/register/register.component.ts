@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from '../services/user.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UserService
   ) {
       this.regForm = formBuilder.group({
         firstname: ['', Validators.required],
@@ -34,12 +36,13 @@ export class RegisterComponent implements OnInit {
       this.password = this.regForm.controls['password'];
   }
 
-  onSubmit(value: string){
+  onSubmit(value){
     this.submitted = true;
     console.log(value);
     console.log(this.regForm.status);
     if(this.regForm.status !== 'INVALID'){
-
+      this.userService.registerUser(value)
+      .subscribe();
     }    
   }
   ngOnInit() {
