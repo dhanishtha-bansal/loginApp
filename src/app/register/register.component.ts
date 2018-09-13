@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
   constructor(
-    formBuilder: FormBuilder
+    formBuilder: FormBuilder,
+    private route: ActivatedRoute
   ) {
       this.regForm = formBuilder.group({
         firstname: ['', Validators.required],
@@ -35,10 +38,12 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     console.log(value);
     console.log(this.regForm.status);
-    console.log(this.regForm.errors);
-    
+    if(this.regForm.status !== 'INVALID'){
+
+    }    
   }
   ngOnInit() {
+    
   }
 
 }

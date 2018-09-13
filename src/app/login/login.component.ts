@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -31,8 +31,13 @@ export class LoginComponent implements OnInit {
 
   
 
-  onSubmit(value: string) {
-    this.Auth.getUserDetails(value.username, value.password);
+  onSubmit(value) {
+
+    
+
+    if(this.loginForm.status !== 'INVALID'){
+      this.Auth.getUserDetails(value.username, value.password);
+    }
     console.log(value);
   }
 }
