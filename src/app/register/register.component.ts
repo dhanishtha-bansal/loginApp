@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 
 
@@ -22,6 +22,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UserService
   ) {
       this.regForm = formBuilder.group({
@@ -42,7 +43,16 @@ export class RegisterComponent implements OnInit {
     console.log(this.regForm.status);
     if(this.regForm.status !== 'INVALID'){
       this.userService.registerUser(value)
-      .subscribe();
+      .subscribe(
+        data => {
+          console.log("Registration successful!!");
+          this.router.navigate(['/login']);
+
+        },
+        error => {
+          console.log(error.message);
+        }
+      );
     }    
   }
   ngOnInit() {

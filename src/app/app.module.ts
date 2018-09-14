@@ -12,6 +12,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { AuthService } from './services/auth.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { UserService } from './services/user.service';
+import { AppGlobals } from './global/global';
 
 const appRoutes : Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +42,8 @@ const appRoutes : Routes = [
   providers: [
     AuthGuard,
     AuthService,
+    UserService,
+    AppGlobals,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
