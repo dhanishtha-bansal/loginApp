@@ -22,6 +22,7 @@ export class UserService {
         .subscribe(user => {
             if (user && user.token === 'JWT') {
               localStorage.setItem('currentUser', JSON.stringify(user));
+              this.config.isLoggedIn = true;
               this.router.navigate(['/home']);
             }
         },

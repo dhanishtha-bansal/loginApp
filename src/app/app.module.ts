@@ -9,7 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './guards/auth.guard';
-import { AuthService } from './services/auth.service';
+import { ToDoService } from './services/todo.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserService } from './services/user.service';
@@ -41,7 +41,7 @@ const appRoutes : Routes = [
   ],
   providers: [
     AuthGuard,
-    AuthService,
+    ToDoService,
     UserService,
     AppGlobals,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

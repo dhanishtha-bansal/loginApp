@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { ToDoService } from '../services/todo.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
-import { longStackSupport } from 'q';
+import { AppGlobals } from '../global/global';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     formBuilder: FormBuilder,
-    private Auth: AuthService,
+    private todoService: ToDoService,
     private userService: UserService,
     private router: Router
   ) 
