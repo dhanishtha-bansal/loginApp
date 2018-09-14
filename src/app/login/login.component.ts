@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { longStackSupport } from 'q';
 
 @Component({
   selector: 'app-login',
@@ -31,21 +32,13 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.userService.logout();
   }  
 
   onSubmit(value) {   
 
     if(this.loginForm.status !== 'INVALID'){
       this.userService.login(value)
-      .subscribe(
-        data => {
-          this.router.navigate(['/home']);
-        },
-        error => {
-          console.log(error);
-        }
-      );
     }
-    //console.log(value);
   }
 }

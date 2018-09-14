@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
     }    
   }
   ngOnInit() {
-    
+    this.userService.logout();
   }
 
 }

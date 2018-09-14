@@ -1,5 +1,5 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
 
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -14,7 +14,7 @@ export class AuthInterceptor implements HttpInterceptor {
             let duplicateUser = users.filter(userInfo => { return userInfo.username === user.username; }).length;
             
             if (duplicateUser) {
-                return throwError({ error: { message: 'Username "' + user.username + '" is already taken' } });
+                return throwError({ message: 'Username "' + user.username + '" is already taken' });
             }
 
             users.push(user);
@@ -37,12 +37,12 @@ export class AuthInterceptor implements HttpInterceptor {
                     username: user.username,
                     firstName: user.firstName,
                     lastName: user.lastName,
-                    token: 'fake-jwt-token'
+                    token: 'JWT'
                 };
 
                 return of(new HttpResponse({ status: 200, body: authUser }));
             } else {
-                return throwError({ error: { message: 'Username or password is incorrect' } });
+                return throwError({ message: 'Username or password is incorrect' });
             }
         }
         return next.handle(req);
