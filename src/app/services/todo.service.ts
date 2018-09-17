@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ToDo } from '../models/todo.model';
-
+import { UserService } from './user.service';
+import * as firebase from 'firebase';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +14,12 @@ export class ToDoService {
   autoIncId: number = 0;
 
   todoList: ToDo[] = [];
-  constructor() { }
+  constructor(private userService: UserService,
+              private http: HttpClient,
+              private router: Router) { }
 
   addTodo(todo: ToDo) {
+    
     if (!todo.id) {
       todo.id = this.autoIncId++ ;
     }
@@ -46,5 +53,15 @@ export class ToDoService {
 
   getTodoById(id: number) {
     return this.todoList.filter(todo => todo.id === id).pop();
+  }
+
+  saveToDos() {
+    let userId = firebase.auth().currentUser.uid;
+    console.log(`User Id : ${userId}`);
+    firebase.database().ref('users/'+userId).set({
+      firstname: "Dhani"
+    });
+    
+   
   }
 }

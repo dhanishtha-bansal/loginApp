@@ -13,7 +13,7 @@ import { AppGlobals } from '../global/global';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
-  username: AbstractControl;
+  email: AbstractControl;
   password: AbstractControl;
 
   constructor(
@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
   ) 
   { 
     this.loginForm = formBuilder.group({
-        username: ['', Validators.required],
+      email: ['', Validators.required],
         password: ['', Validators.required]
     });
-    this.username = this.loginForm.controls['username'];
+    this.email = this.loginForm.controls['email'];
     this.password = this.loginForm.controls['password'];
   }
 
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   onSubmit(value) {   
 
     if(this.loginForm.status !== 'INVALID'){
-      this.userService.login(value)
+      this.userService.login(value.email, value.password);
     }
   }
 }

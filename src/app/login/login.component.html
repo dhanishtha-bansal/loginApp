@@ -1,8 +1,8 @@
 <div class="login-page form">
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)" class="login-form">
     <div class="form-group" >
-      <label for="username">Username</label>
-      <input type="text" class="form-control" formControlName="username" required [ngClass]=" {'was-validated': submitted && !username.valid }"/>
+      <label for="email">Email ID</label>
+      <input type="email" class="form-control" formControlName="email" required [ngClass]=" {'was-validated': submitted && !email.valid }"/>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -11,7 +11,7 @@
     <div class="form-group">
       <button class="btn btn-primary">Login</button>
     </div>
-    <p class="message">Not registered? <a href="#">Create an account</a></p>
+    <p class="message">Not registered? <a routerLink="/register">Create an account</a></p>
   </form>
 </div>
     

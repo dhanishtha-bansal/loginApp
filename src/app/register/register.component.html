@@ -15,10 +15,10 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" class="form-control" formControlName="username" required [ngClass]=" {'was-validated': submitted && !username.valid }"/>
-        <div *ngIf="submitted && !username.valid" class="help-block">
-            Username is required
+        <label for="username">Email ID</label>
+        <input type="email" class="form-control" formControlName="email" required [ngClass]=" {'was-validated': submitted && !email.valid }"/>
+        <div *ngIf="submitted && !email.valid" class="help-block">
+            Email ID is required
         </div>
     </div>
     <div class="form-group">
@@ -31,7 +31,7 @@
     <div class="form-group">
         <button class="btn btn-primary" >Register</button>
     </div>
-    <p class="message">Already registered? <a href="#">Sign In</a></p>
+    <p class="message">Already registered? <a routerLink="/login">Sign In</a></p>
   </form>
 </div>
 

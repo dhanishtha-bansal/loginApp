@@ -14,7 +14,7 @@ export class RegisterComponent implements OnInit {
   regForm: FormGroup;
   firstname: AbstractControl;
   lastname: AbstractControl;
-  username: AbstractControl;
+  email: AbstractControl;
   password: AbstractControl;
 
   submitted = false;
@@ -28,12 +28,12 @@ export class RegisterComponent implements OnInit {
       this.regForm = formBuilder.group({
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
-        username: ['', Validators.required],
+        email: ['', Validators.required],
         password: ['', [Validators.required, Validators.minLength(6)]]
       });
       this.firstname = this.regForm.controls['firstname'];
       this.lastname = this.regForm.controls['lastname'];
-      this.username = this.regForm.controls['username'];
+      this.email = this.regForm.controls['email'];
       this.password = this.regForm.controls['password'];
   }
 
@@ -42,16 +42,7 @@ export class RegisterComponent implements OnInit {
     console.log(value);
     console.log(this.regForm.status);
     if(this.regForm.status !== 'INVALID'){
-      this.userService.registerUser(value)
-      .subscribe(
-        data => {
-          console.log("Registration successful!!");
-          this.router.navigate(['/login']);
-        },
-        error => {
-          console.log(error.message);
-        }
-      );
+      this.userService.registerUser(value);
     }    
   }
   ngOnInit() {

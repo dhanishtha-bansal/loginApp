@@ -31,4 +31,7 @@ export class HomeComponent implements OnInit {
   get todos() {
     return this.todoService.getAllTodos();
   }
+  saveToDos() {
+    this.todoService.saveToDos();
+  }
 }

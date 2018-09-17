@@ -1,6 +1,7 @@
 <div class="todoapp">
   <header class="header">
     <h1>Todo List</h1>
+    <div class="nav navbar-nav navbar-right"><button (click)="saveToDos()">Logout</button></div>
     <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="todo.title" (keyup.enter)="addTodo()">
   </header>
   <div class="main" *ngIf="todos.length > 0">
