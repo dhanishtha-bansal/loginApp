@@ -5,6 +5,7 @@ import * as firebase from 'firebase';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,12 @@ import { map } from 'rxjs/operators';
 export class ToDoService {
 
   autoIncId: number = 0;
-
   todoList: ToDo[] = [];
   constructor(private userService: UserService,
               private http: HttpClient,
               private router: Router) { }
 
   addTodo(todo: ToDo) {
-    
     if (!todo.id) {
       todo.id = this.autoIncId++ ;
     }
@@ -56,12 +55,31 @@ export class ToDoService {
   }
 
   saveToDos() {
+    let todos = this.todoList;
     let userId = firebase.auth().currentUser.uid;
     console.log(`User Id : ${userId}`);
-    firebase.database().ref('users/'+userId).set({
-      firstname: "Dhani"
-    });
+    let refUsers = firebase.database().ref(`users/`);
     
-   
+    refUsers.orderByChild('userID').equalTo(userId).on("child_added", function(snapshot) {
+      if(snapshot.hasChild("todoList")) {
+        console.log(todos);
+        snapshot.ref.child("todoList").set(todos);
+      }
+      else {
+        snapshot.ref.child("todoList").push().set(todos);
+      }
+    });
+    this.router.navigate['/login'];
+  }
+
+  initializeList() {
+    let userId = firebase.auth().currentUser.uid;
+      console.log(`User Id : ${userId}`);
+      let refUsers = firebase.database().ref(`users/`);
+      refUsers.orderByChild('userID').equalTo(userId).on("child_added", (snapshot) => {
+          var user = snapshot.val();
+          if(user.todoList != undefined)
+            this.todoList = user.todoList; 
+      });
   }
 }

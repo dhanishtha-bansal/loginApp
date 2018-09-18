@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AppGlobals } from '../global/global';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { ToDo } from '../models/todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +16,15 @@ export class UserService {
               private router: Router) { }
 
   token: string;
-  
-  registerUser(user: User){
-    user.todoList = [];
+
+  registerUser(user: User) {
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
     .then((response) => {
       console.log(response.user.uid);
       user.userID = response.user.uid;
       this.http.post<any>("https://todoapp-f64ba.firebaseio.com/users.json", user).subscribe(
         () => {
-          console.log("Registration successful!!");
+          alert("Registration successful!!");
           this.router.navigate(['/login']);
         },
         error => {

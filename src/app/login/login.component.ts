@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   }  
 
   onSubmit(value) {   
-
     if(this.loginForm.status !== 'INVALID'){
       this.userService.login(value.email, value.password);
     }
