@@ -38,17 +38,24 @@ export class UserService {
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then((response) => {
       console.log(response);
+      firebase.auth().currentUser.getIdToken()
+        .then(
+          (token: string) => this.token = token
+        )
       this.router.navigate(['/home']);
     })   
-    .catch( error => console.log(error));
+    .catch( error => {
+      err
+      console.log(error)
+    });
   }
 
   getToken() {
       firebase.auth().currentUser.getIdToken()
       .then( (token: string) => this.token = token )
-
-      
+      return this.token;    
   }
+
   logout() {
     localStorage.removeItem('currentUser');
   }

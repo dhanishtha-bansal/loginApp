@@ -16,6 +16,10 @@ export class HomeComponent implements OnInit {
     this.todoService.initializeList();
   }
 
+  ngOnDestroy() {
+    //this.todoService.saveToDos();
+  }
+
   addTodo() {
     this.todoService.addTodo(this.todo);
     this.todo = new ToDo();
@@ -31,9 +35,5 @@ export class HomeComponent implements OnInit {
 
   get todos() {
     return this.todoService.getAllTodos();
-  }
-
-  saveToDos() {
-    this.todoService.saveToDos();
   }
 }
