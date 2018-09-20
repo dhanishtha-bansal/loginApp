@@ -54,11 +54,12 @@ export class ToDoService {
     this.user.on("child_added", 
       (snapshot) => {
         if(snapshot.hasChild("todoList")) {
-          console.log(this.todoList);
+         
           snapshot.ref.child("todoList").set(this.todoList);
         }
         else {
-          snapshot.ref.child("todoList").push().set(this.todoList);
+          snapshot.ref.child("todoList").push(this.todoList);
+          snapshot.ref.child("todoList").set(this.todoList);
         }
     });
   }
@@ -73,11 +74,11 @@ export class ToDoService {
           if(user.todoList !== undefined)
           {
             console.log(typeof user.todoList);
-            // this.todoList = user.todoList;
-            var key = Object.keys(user.todoList);
-            console.log(key);
-            console.log(key[0]);
-            this.todoList = user.todoList[key[0]];
+            this.todoList = user.todoList;
+            // var key = Object.keys(user.todoList);
+            // console.log(key);
+            // console.log(key[0]);
+            // this.todoList = user.todoList[key[0]];
           }
           else {
             this.todoList = [];
