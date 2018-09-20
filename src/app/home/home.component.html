@@ -1,7 +1,13 @@
-<div class="todoapp">
-  <header class="header">
-    <h1>Todo List</h1>
-    <div class="nav navbar-nav navbar-right"><a routerLink="/login">Logout</a></div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a href="#" class="navbar-brand">Todo</a>
+          </div>
+          <div class="collapse navbar-collapse nav navbar-nav navbar-right"><a routerLink="/login">Logout</a></div>
+        </div>
+    </nav> 
+    <div class="todoapp">
+  <header class="header">  
     <input class="new-todo" placeholder="What needs to be done?" autofocus="" [(ngModel)]="todo.title" (keyup.enter)="addTodo()">
   </header>
   <div class="main" *ngIf="todos.length > 0">

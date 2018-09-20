@@ -72,6 +72,7 @@ export class ToDoService {
           var user = snapshot.val();
           if(user.todoList !== undefined)
           {
+            console.log(typeof user.todoList);
             // this.todoList = user.todoList;
             var key = Object.keys(user.todoList);
             console.log(key);

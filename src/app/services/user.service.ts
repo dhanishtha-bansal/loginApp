@@ -5,6 +5,7 @@ import { AppGlobals } from '../global/global';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
 import { ToDo } from '../models/todo.model';
+import { ErrorService } from './error.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ import { ToDo } from '../models/todo.model';
 export class UserService {
 
   constructor(private http: HttpClient, 
-              private config: AppGlobals,
+              private errorService: ErrorService,
               private router: Router) { }
 
   token: string;
@@ -28,9 +29,14 @@ export class UserService {
           this.router.navigate(['/login']);
         },
         error => {
+          this.errorService.error(error);
           console.log(error.message);
         }
       )
+    })
+    .catch( error => {
+      this.errorService.error(error);
+      console.log(error.message);
     });
   }
 
@@ -45,7 +51,7 @@ export class UserService {
       this.router.navigate(['/home']);
     })   
     .catch( error => {
-      err
+      this.errorService.error(error);
       console.log(error)
     });
   }
